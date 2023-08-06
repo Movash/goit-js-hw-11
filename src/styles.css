@@ -11,8 +11,8 @@ ul, ol {
 
 img {
     display: block;
-    height: 200px;
-    border-radius: 5px 5px 0px 0px;
+    max-height: 300px;
+    border-radius: 5px;
 }
 
 ul {
@@ -25,6 +25,7 @@ a {
 
 body {
     background-color: #37729f;
+    margin: 40px;
 }
 
 .hidden {
@@ -78,7 +79,7 @@ button:focus {
 .photo-card {
     flex-basis: calc((100% - 72px) / 4);
     box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08), 0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 5px;
     background-color: #93efff;
     color: rgb(15, 15, 15)
 }
@@ -89,6 +90,13 @@ button:focus {
     flex-wrap: wrap;
     margin-top: 100px;
     gap: 40px;
+}
+
+.img-wrapper {
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .info {

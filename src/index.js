@@ -43,7 +43,6 @@
 //         loadMore.classList.remove('hidden');
 //       }
 //       lightbox.refresh();
-//       smoothScroll();
 //     })
 //     .catch(() => {
 //       Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
@@ -124,7 +123,7 @@
 //   .firstElementChild.getBoundingClientRect();
 
 // window.scrollBy({
-//   top: cardHeight * 2,
+//   top: cardHeight * 1.5,
 //   behavior: 'smooth',
 // });
 // }
@@ -152,6 +151,7 @@ formSubmit.addEventListener('submit', handlerSubmit);
 
 function handlerSubmit(evt) {
   evt.preventDefault();
+  page = 1;
   gallery.innerHTML = '';
   searchText = evt.currentTarget[0].value.trim().split(' ').join('+');
 
@@ -173,7 +173,6 @@ function handlerSubmit(evt) {
       createMarkup(cards);
       observer.observe(target);
       lightbox.refresh();
-      smoothScroll();
     })
     .catch(() => {
       Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
@@ -195,7 +194,7 @@ function createMarkup(arr) {
       }) => `
 <a class="gallery-link" href="${largeImageURL}">
   <div class="photo-card">
-    <div>
+    <div class="img-wrapper">
       <img src="${webformatURL}" alt="${tags}" loading="lazy" width=300px/>
     </div>
     <div class="info">
@@ -224,17 +223,6 @@ const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
-function smoothScroll() {
-  const { height: cardHeight } = document
-    .querySelector('.gallery')
-    .firstElementChild.getBoundingClientRect();
-
-  window.scrollBy({
-    top: cardHeight * 2,
-    behavior: 'smooth',
-  });
-}
-
 let options = {
   root: null,
   rootMargin: '300px',
@@ -260,11 +248,30 @@ function handlerLoad(entries, observer) {
       const cards = data.hits;
       createMarkup(cards);
       lightbox.refresh();
-      smoothScroll();
     })
     .catch(() => {
       Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
     });
     }
   })
+}
+
+function jumpUp() {
+const scrollTop = 
+document.documentElement.scrollHeight;
+window.scrollBy({
+top: -scrollTop,
+behavior: 'smooth',
+});
+}
+
+
+function onScroll() {
+el.btnUp.classList.toggle('hidden', window.scrollY >800);}
+
+function scrollToTop() {
+window.scrollTo({
+  top: 0,
+  behavior: 'smooth',
+});
 }
